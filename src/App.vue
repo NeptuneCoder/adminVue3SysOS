@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Edit,Search} from "@element-plus/icons-vue";
+import { Edit, Search } from "@element-plus/icons-vue";
 </script>
 
 <template>
