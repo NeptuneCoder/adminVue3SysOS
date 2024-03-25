@@ -1,0 +1,15 @@
+//用于清除浏览器的默认样式
+@import "./reset.scss";
+
+//设置scrollbar的滚动条宽度
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb{
+    background-color: $base-menu-bg-color;
+}
+
+
