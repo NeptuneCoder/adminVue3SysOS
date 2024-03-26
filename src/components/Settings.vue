@@ -31,7 +31,7 @@
 import { useLayoutSettingStore } from "@/store/useLayoutSettingStore";
 import { useUserStore } from "@/store/useUserStore";
 import { useRouter } from "vue-router";
-import {useRoute} from "vue-router";
+import { useRoute } from "vue-router";
 let $route = useRoute();
 const $router = useRouter();
 let layoutSettingStore = useLayoutSettingStore();
@@ -50,7 +50,7 @@ let fullScreen = () => {
 };
 const handleLogout = async () => {
   userStore.logout().then(() => {
-    $router.push({ path: "/login",query: { redirect: $route.path } });
+    $router.push({ path: "/login", query: { redirect: $route.path } });
   });
 };
 </script>

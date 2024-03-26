@@ -58,7 +58,7 @@ import { User, Lock } from "@element-plus/icons-vue";
 import { reactive } from "vue";
 import { useUserStore } from "@/store/useUserStore";
 import { ElMessage, ElNotification } from "element-plus";
-import { useRouter,useRoute } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { ref } from "vue";
 import { getGreetingsMsg } from "@/utils/MsgUtils";
 let userStore = useUserStore();
@@ -131,9 +131,7 @@ async function login() {
         message: getGreetingsMsg(),
       });
       let redirect = $route.query.redirect;
-      $router.push(redirect||"/");
-
-      
+      $router.push(redirect || "/");
     })
     .catch((error) => {
       loading.value = false;

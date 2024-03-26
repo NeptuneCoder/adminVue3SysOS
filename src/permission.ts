@@ -3,9 +3,9 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 console.log("permission.ts");
 router.beforeEach((to, from, next) => {
-    NProgress.start();
+  NProgress.start();
   const token = localStorage.getItem("token");
-console.log("beforeEach topermission.ts token:", token);
+  console.log("beforeEach topermission.ts token:", token);
   if (to.path === "/login") {
     next();
   } else if (token) {
@@ -15,7 +15,7 @@ console.log("beforeEach topermission.ts token:", token);
   }
 });
 router.afterEach(() => {
-    NProgress.done();
+  NProgress.done();
   const token = localStorage.getItem("token");
   console.log("afterEach topermission.ts token:", token);
   if (token) {
