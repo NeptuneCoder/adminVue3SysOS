@@ -50,9 +50,12 @@
 <script lang="ts" setup name="NavMenu">
 import { defineProps } from "vue";
 defineProps(["menuList"]);
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const goRoute = (route) => {
   console.log("route === ", route);
+  router.push(route.index);
 };
 </script>
 

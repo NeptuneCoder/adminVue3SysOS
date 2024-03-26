@@ -65,7 +65,7 @@ export const constantRoute = [
     },
     children: [
       {
-        path: "/user",
+        path: "/acl/user",
         name: "aclUser",
         component: () => import("@/views/acl/user/index.vue"),
         meta: {
@@ -75,7 +75,7 @@ export const constantRoute = [
         },
       },
       {
-        path: "/role",
+        path: "/acl/role",
         name: "aclRole",
         component: () => import("@/views/acl/role/index.vue"),
         meta: {
@@ -85,11 +85,11 @@ export const constantRoute = [
         },
       },
       {
-        path: "/permission",
+        path: "/acl/permission",
         name: "permission",
         component: () => import("@/views/acl/permission/index.vue"),
         meta: {
-          title: "菜单管理",
+          title: "权限菜单管理",
           icon: "UserFilled",
           hidden: false,
         },
@@ -107,7 +107,7 @@ export const constantRoute = [
     },
     children: [
       {
-        path: "/sku",
+        path: "/product/sku",
         name: "sku",
         component: () => import("@/views/product/sku/index.vue"),
         meta: {
@@ -117,7 +117,7 @@ export const constantRoute = [
         },
       },
       {
-        path: "/spu",
+        path: "/product/spu",
         name: "spu",
         component: () => import("@/views/product/spu/index.vue"),
         meta: {
@@ -127,7 +127,7 @@ export const constantRoute = [
         },
       },
       {
-        path: "/attr",
+        path: "/product/attr",
         name: "attr",
         component: () => import("@/views/product/attr/index.vue"),
         meta: {
@@ -137,11 +137,11 @@ export const constantRoute = [
         },
       },
       {
-        path: "/trademark",
+        path: "/product/trademark",
         name: "trademark",
         component: () => import("@/views/product/trademark/index.vue"),
         meta: {
-          title: "属性管理",
+          title: "品牌管理",
           icon: "UserFilled",
           hidden: false,
         },

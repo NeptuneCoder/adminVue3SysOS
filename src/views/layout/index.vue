@@ -7,7 +7,9 @@
       </el-scrollbar>
     </div>
     <div class="layout_topbar"></div>
-    <div class="layout_main wrapper"></div>
+    <div class="layout_main wrapper">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
 
