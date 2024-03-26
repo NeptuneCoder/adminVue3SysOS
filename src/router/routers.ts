@@ -19,6 +19,7 @@ export const constantRoute = [
       icon: "HomeFilled",
       hidden: false,
     },
+    redirect: "/home",//当访问根路径时，自动重定向到/home
     children: [
       {
         path: "/home",
@@ -26,26 +27,6 @@ export const constantRoute = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "首页",
-          icon: "HomeFilled",
-          hidden: false,
-        },
-      },
-      {
-        path: "/test",
-        name: "test",
-        component: () => import("@/views/home/index.vue"),
-        meta: {
-          title: "测试",
-          icon: "HomeFilled",
-          hidden: false,
-        },
-      },
-      {
-        path: "/test2",
-        name: "test2",
-        component: () => import("@/views/home/index.vue"),
-        meta: {
-          title: "测试2",
           icon: "HomeFilled",
           hidden: false,
         },
