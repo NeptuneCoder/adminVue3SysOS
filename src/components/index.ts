@@ -5,11 +5,13 @@ import Logo from "@/components/Logo.vue";
 import NavMenu from "@/components/NavMenu.vue";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import MainContianer from "@/components/MainContianer.vue";
+import Tabbar from "@/components/Tabbar.vue";
 const components: { [name: string]: Component } = {
   SvgIcon,
   Logo,
   NavMenu,
   MainContianer,
+  Tabbar,
 };
 export default {
   install(app: App) {

@@ -3,10 +3,20 @@
     <div class="layout_slider">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <NavMenu :menuList="userStore.routes"></NavMenu>
+        <el-menu
+          class="menu"
+          :collapse="false"
+          background-color="#001529"
+          text-color="#fff"
+          :default-active="$route.path"
+        >
+          <NavMenu :menuList="userStore.routes"></NavMenu>
+        </el-menu>
       </el-scrollbar>
     </div>
-    <div class="layout_topbar"></div>
+    <div class="layout_topbar">
+      <Tabbar></Tabbar>
+    </div>
     <div class="layout_main wrapper">
       <MainContianer></MainContianer>
     </div>
@@ -17,6 +27,9 @@
 //获取用户数据的仓库
 import MainContianer from "@/components/MainContianer.vue";
 import { useUserStore } from "@/store/useUserStore";
+import { useRoute } from "vue-router";
+
+const $route = useRoute();
 let userStore = useUserStore();
 console.log("测试这里获取数据是否被执行？");
 console.log(userStore.routes);
