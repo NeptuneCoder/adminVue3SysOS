@@ -8,13 +8,14 @@
     </div>
     <div class="layout_topbar"></div>
     <div class="layout_main wrapper">
-      <RouterView></RouterView>
+      <MainContianer></MainContianer>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 //获取用户数据的仓库
+import MainContianer from "@/components/MainContianer.vue";
 import { useUserStore } from "@/store/useUserStore";
 let userStore = useUserStore();
 console.log("测试这里获取数据是否被执行？");

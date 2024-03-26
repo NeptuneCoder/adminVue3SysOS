@@ -4,7 +4,13 @@ import type { App, Component } from "vue";
 import Logo from "@/components/Logo.vue";
 import NavMenu from "@/components/NavMenu.vue";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
-const components: { [name: string]: Component } = { SvgIcon, Logo, NavMenu };
+import MainContianer from "@/components/MainContianer.vue";
+const components: { [name: string]: Component } = {
+  SvgIcon,
+  Logo,
+  NavMenu,
+  MainContianer,
+};
 export default {
   install(app: App) {
     Object.keys(components).forEach((key: string) => {
