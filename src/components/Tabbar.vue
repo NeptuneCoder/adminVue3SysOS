@@ -2,13 +2,11 @@
 <template>
   <div class="tabbar">
     <div class="tabbar-left">
-      <el-icon type="menu"> </el-icon>
-      <el-breadcrumb separator-icon="arrow-right">
-        <el-breadcrumb-item>promotion list</el-breadcrumb-item>
-        <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
-      </el-breadcrumb>
+      <NavBreadcrumb />
     </div>
-    <div class="tabbar-right">我是内容</div>
+    <div class="tabbar-right">
+      <Settings />
+    </div>
   </div>
 </template>
 <script setup lang="ts" name="Tabbar"></script>
@@ -18,16 +16,19 @@
   justify-content: space-between;
   height: 100%;
   align-items: center;
+  border-bottom: 1px solid #fff;
+  background-color: #fff;
   .tabbar-left {
     width: 50%;
-    background-color: pink;
-    el-breadcrumb {
-      margin-left: 10px;
-    }
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
   }
   .tabbar-right {
     width: 50%;
-    background-color: pink;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 }
 </style>

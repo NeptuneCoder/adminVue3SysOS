@@ -60,7 +60,7 @@ console.log(userStore.routes);
   .layout_topbar {
     width: calc(100% - #{$base-menu-width});
     height: $base-menu-topbar-height;
-    background-color: green;
+    background-color: white;
     position: absolute;
     top: 0;
     left: $base-menu-width;
