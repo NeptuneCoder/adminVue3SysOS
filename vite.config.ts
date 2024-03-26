@@ -16,9 +16,10 @@ export default defineConfig(({ command }) => {
         symbolId: "icon-[dir]-[name]",
       }),
       viteMockServe({
-        mockPath: "mock", // mock 文件目录
-        localEnabled: command === "serve", // 开启本地 mock 功能
-        prodEnabled: false, // 生产环境下关闭 mock 功能
+        mockPath: "./src/mocks", // mock 文件目录
+        // localEnabled: command === "serve", // 开启本地 mock 功能
+        localEnabled: command === 'serve',//保证开发阶段可以使用mock接口
+        // prodEnabled: true, // 生产环境下关闭 mock 功能
       }),
     ],
     resolve: {

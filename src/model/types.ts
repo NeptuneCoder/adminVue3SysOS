@@ -8,4 +8,6 @@ export interface LoginUser {
 export interface UserState {
   token: string | null;
   routes: RouteRecordRaw[];
+  username: string;
+  avatar: string;
 }

@@ -9,3 +9,10 @@ export function login(data: LoginUser) {
     data: data,
   });
 }
+
+export function getUserInfo() {
+  return netInstance.request({
+    url: API.getUserInfo,
+    method: "get",
+  });
+}

@@ -1,6 +1,7 @@
 //用于对axios进行封装，统一请求的配置，请求头，拦截器等
 import axios from "axios";
 import { ElMessage } from "element-plus";
+import { useUserStore } from "@/store/useUserStore";
 
 const netInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
@@ -8,7 +9,10 @@ const netInstance = axios.create({
   headers: {},
 });
 netInstance.interceptors.request.use((config) => {
-  config.headers.Authorization = "Bearer ";
+  let userStore = useUserStore();
+  if (userStore.getToken) {
+    config.headers.Authorization = `Bearer ${userStore.getToken}`;
+  }
   return config;
 });
 
