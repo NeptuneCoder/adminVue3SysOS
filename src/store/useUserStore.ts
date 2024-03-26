@@ -9,15 +9,20 @@ export const useUserStore = defineStore("user", {
     return {
       token: getToken(),
       routes: constantRoute,
-      username: "admin",//
-      avatar:"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",//
+      username: "", //
+      avatar: "", //
     };
   },
   actions: {
     async userLogin(username: string, pwd: string) {
-      console.log("这里是store中，我被调用了嘛？");
-      const res = await login({ username: name, pwd: pwd });
-      if (res.data.code === 200) {
+      console.log(
+        "这里是store中，我被调用了嘛？ username=",
+        username,
+        " pwd=",
+        pwd,
+      );
+      const res = await login({ username: username, password: pwd });
+      if (res.code == 200) {
         let token = res.data.token;
         this.token = token;
         saveToken(token);
@@ -29,10 +34,16 @@ export const useUserStore = defineStore("user", {
     async getUserInfo() {
       // TODO: 获取用户信息
 
-      let res = await getUserInfo();
-
-      console.log("获取用户信息", res);
-      return "userInfo";
+      const res = await getUserInfo();
+      if (res.code == 200) {
+        this.username = res.data.checkUser.username;
+        this.avatar = res.data.checkUser.avatar;
+        console.log("获取用户信息成功", this.avatar);
+        console.log("获取用户信息成功", this.username);
+        return "ok";
+      } else {
+        return Promise.reject(new Error(res.message));
+      }
     },
   },
   getters: {

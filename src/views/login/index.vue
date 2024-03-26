@@ -107,15 +107,15 @@ const data = reactive({
 async function login() {
   // validate the form   验证表单
   await loginForm.value.validate();
-  // if (data.username === "" || data.pwd === "") {
-  //   ElMessage.error("用户密码和账号不能为空");
-  //   return;
-  // }
+  if (data.username === "" || data.pwd === "") {
+    ElMessage.error("用户密码和账号不能为空");
+    return;
+  }
 
-  // if (data.username.length < 4 || data.pwd.length < 6) {
-  //   ElMessage.error("用户账号或密码长度不对");
-  //   return;
-  // }
+  if (data.username.length < 4 || data.pwd.length < 6) {
+    ElMessage.error("用户账号或密码长度不对");
+    return;
+  }
   console.log("这里是login vue中，我被调用了嘛？");
 
   loading.value = true;

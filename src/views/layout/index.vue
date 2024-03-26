@@ -78,6 +78,8 @@ console.log(userStore.routes);
     height: $base-menu-topbar-height;
     background-color: white;
     position: absolute;
+    align-items: center;
+    line-height: $base-menu-topbar-height;
     top: 0;
     left: $base-menu-width;
     transition: all 0.3s ease;

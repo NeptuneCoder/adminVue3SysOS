@@ -11,7 +11,7 @@ const netInstance = axios.create({
 netInstance.interceptors.request.use((config) => {
   let userStore = useUserStore();
   if (userStore.getToken) {
-    config.headers.Authorization = `Bearer ${userStore.getToken}`;
+    config.headers.token = `${userStore.getToken}`;
   }
   return config;
 });
