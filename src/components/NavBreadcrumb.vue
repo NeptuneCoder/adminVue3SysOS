@@ -10,7 +10,7 @@
       :to="{ path: item.path }"
       v-show="item.meta.title"
     >
-    <!-- @click="$router.push(item.path)" -->
+      <!-- @click="$router.push(item.path)" -->
       <el-icon>
         <component :is="item.meta.icon" />
       </el-icon>
