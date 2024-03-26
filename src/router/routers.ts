@@ -26,7 +26,7 @@ export const constantRoute = [
         name: "home",
         component: () => import("@/views/home/index.vue"),
         meta: {
-          title: "首页",
+          title: "首页界面",
           icon: "HomeFilled",
           hidden: false,
         },
