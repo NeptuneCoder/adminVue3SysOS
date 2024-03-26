@@ -17,4 +17,5 @@ app.use(ElementPlus, {
 app.use(gloablComponent);
 app.use(router);
 app.use(pinia);
+import("@/permission");
 app.mount("#app");
