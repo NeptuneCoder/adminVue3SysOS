@@ -15,7 +15,7 @@ export const constantRoute = [
     name: "layout",
     component: () => import("@/views/layout/index.vue"),
     meta: {
-      title: "layout",
+      title: "",
       icon: "HomeFilled",
       hidden: false,
     },

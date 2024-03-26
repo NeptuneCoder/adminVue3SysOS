@@ -8,6 +8,7 @@
       v-for="(item, index) in $route.matched"
       :key="index"
       @click="$router.push(item.path)"
+      v-show="item.meta.title"
     >
       <el-icon>
         <component :is="item.meta.icon" />
