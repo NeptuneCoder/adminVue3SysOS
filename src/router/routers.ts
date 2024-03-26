@@ -58,6 +58,7 @@ export const constantRoute = [
     path: "/acl",
     name: "acl",
     component: () => import("@/views/layout/index.vue"),
+    redirect: "/acl/user", //当访问/acl时，自动重定向到/acl/user
     meta: {
       title: "权限管理",
       icon: "HomeFilled",
@@ -100,6 +101,7 @@ export const constantRoute = [
     path: "/product",
     name: "product",
     component: () => import("@/views/layout/index.vue"),
+    redirect: "/product/sku", //当访问/product时，自动重定向到/product/sku
     meta: {
       title: "商品管理",
       icon: "HomeFilled",

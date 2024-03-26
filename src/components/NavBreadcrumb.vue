@@ -7,9 +7,10 @@
     <el-breadcrumb-item
       v-for="(item, index) in $route.matched"
       :key="index"
-      @click="$router.push(item.path)"
+      :to="{ path: item.path }"
       v-show="item.meta.title"
     >
+    <!-- @click="$router.push(item.path)" -->
       <el-icon>
         <component :is="item.meta.icon" />
       </el-icon>
