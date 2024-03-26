@@ -16,6 +16,7 @@ export const constantRoute = [
     meta: {
       title: "layout",
       icon: "el-icon-s-home",
+      hidden: false,
     },
     children: [
       {
@@ -25,22 +26,27 @@ export const constantRoute = [
         meta: {
           title: "首页",
           icon: "el-icon-s-home",
+          hidden: false,
         },
-      },{
+      },
+      {
         path: "/test",
         name: "test",
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "测试",
           icon: "el-icon-s-home",
+          hidden: false,
         },
-      },{
+      },
+      {
         path: "/test2",
         name: "test2",
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "测试2",
           icon: "el-icon-s-home",
+          hidden: false,
         },
       },
     ],
