@@ -45,6 +45,14 @@ export const useUserStore = defineStore("user", {
         return Promise.reject(new Error(res.message));
       }
     },
+    async logout() {
+      console.log("logout");
+      this.token = "";
+      this.username = "";
+      this.avatar = "";
+      saveToken("");
+      return "ok";
+    },
   },
   getters: {
     getToken(state) {

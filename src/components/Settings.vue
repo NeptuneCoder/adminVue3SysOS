@@ -22,7 +22,7 @@
     <el-button> {{ userStore.username }} </el-button>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
@@ -30,6 +30,8 @@
 <script setup lang="ts" name="Settings">
 import { useLayoutSettingStore } from "@/store/useLayoutSettingStore";
 import { useUserStore } from "@/store/useUserStore";
+import { useRouter } from "vue-router";
+const $router = useRouter();
 let layoutSettingStore = useLayoutSettingStore();
 let userStore = useUserStore();
 let handleClick = () => {
@@ -43,6 +45,11 @@ let fullScreen = () => {
   } else {
     document.documentElement.requestFullscreen();
   }
+};
+const handleLogout = async () => {
+  userStore.logout().then(() => {
+    $router.push({path:'/login'});
+  });
 };
 </script>
 <style lang="less" scoped></style>
