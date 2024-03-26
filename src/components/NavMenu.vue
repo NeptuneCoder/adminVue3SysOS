@@ -7,7 +7,11 @@
   >
     <template v-for="(item, index) in menuList" :key="item.path">
       <template v-if="!item.children">
-        <el-menu-item v-if="!item.meta.hidden" :index="item.path" @click="goRoute">
+        <el-menu-item
+          v-if="!item.meta.hidden"
+          :index="item.path"
+          @click="goRoute"
+        >
           <template #title>
             <el-icon>
               <component :is="item.meta.icon"></component>
@@ -17,7 +21,7 @@
         </el-menu-item>
       </template>
       <template v-if="item.children && item.children.length === 1">
-        <el-menu-item index="{{ index }}" v-if="!item.meta.hidden">
+        <el-menu-item :index="item.path" v-if="!item.meta.hidden">
           <template #title>
             <el-icon>
               <component :is="item.children[0].meta.icon"></component>
@@ -27,7 +31,7 @@
         </el-menu-item>
       </template>
       <el-sub-menu
-        index="{{ index }}"
+      :index="item.path"
         v-if="item.children && item.children.length > 1"
       >
         <template #title>
@@ -46,10 +50,9 @@
 import { defineProps } from "vue";
 defineProps(["menuList"]);
 
-
-const  goRoute = (route)=>{
-  console.log("route === ",route);
-}
+const goRoute = (route) => {
+  console.log("route === ", route);
+};
 </script>
 
 <style lang="scss" scoped>
