@@ -3,7 +3,7 @@
     <div class="layout_slider">
       <Logo></Logo>
       <el-scrollbar class="scrollbar">
-        <Menu :menuList="userStore.routes"></Menu>
+        <NavMenu :menuList="userStore.routes"></NavMenu>
       </el-scrollbar>
     </div>
     <div class="layout_topbar"></div>

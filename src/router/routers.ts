@@ -7,6 +7,7 @@ export const constantRoute = [
     meta: {
       title: "登录",
       hidden: true,
+      icon: "HomeFilled",
     },
   },
   {
@@ -15,7 +16,7 @@ export const constantRoute = [
     component: () => import("@/views/layout/index.vue"),
     meta: {
       title: "layout",
-      icon: "el-icon-s-home",
+      icon: "HomeFilled",
       hidden: false,
     },
     children: [
@@ -25,7 +26,7 @@ export const constantRoute = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "首页",
-          icon: "el-icon-s-home",
+          icon: "HomeFilled",
           hidden: false,
         },
       },
@@ -35,7 +36,7 @@ export const constantRoute = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "测试",
-          icon: "el-icon-s-home",
+          icon: "HomeFilled",
           hidden: false,
         },
       },
@@ -45,7 +46,7 @@ export const constantRoute = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "测试2",
-          icon: "el-icon-s-home",
+          icon: "HomeFilled",
           hidden: false,
         },
       },
@@ -56,6 +57,7 @@ export const constantRoute = [
     redirect: "/404",
     name: "Any",
     meta: {
+      icon: "HomeFilled",
       title: "404",
       hidden: true,
     },
