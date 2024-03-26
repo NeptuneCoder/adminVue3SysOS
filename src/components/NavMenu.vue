@@ -21,6 +21,7 @@
         </el-menu-item>
       </template>
       <template v-if="item.children && item.children.length === 1">
+        <!-- index: {{ index }} 一样会导致标签事件错乱 -->
         <el-menu-item :index="item.path" v-if="!item.meta.hidden">
           <template #title>
             <el-icon>
@@ -31,7 +32,7 @@
         </el-menu-item>
       </template>
       <el-sub-menu
-      :index="item.path"
+        :index="item.path"
         v-if="item.children && item.children.length > 1"
       >
         <template #title>
