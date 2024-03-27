@@ -16,3 +16,10 @@ export function getUserInfo() {
     method: "get",
   });
 }
+
+export const reqlogout = () => {
+  return netInstance.request({
+    url: API.logout,
+    method: "post",
+  });
+};

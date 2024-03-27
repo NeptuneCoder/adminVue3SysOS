@@ -1,4 +1,4 @@
-import { login, getUserInfo } from "@/api/user";
+import { login, getUserInfo, reqlogout } from "@/api/user";
 import { defineStore } from "pinia";
 import { getToken, saveToken, removeToken } from "@/utils/storeUtils";
 import { constantRoute } from "@/router/routers";
@@ -15,15 +15,10 @@ export const useUserStore = defineStore("user", {
   },
   actions: {
     async userLogin(username: string, pwd: string) {
-      console.log(
-        "这里是store中，我被调用了嘛？ username=",
-        username,
-        " pwd=",
-        pwd,
-      );
       const res = await login({ username: username, password: pwd });
       if (res.code == 200) {
-        let token = res.data.token;
+        let token = res.data;
+        console.log("登录成功", token);
         this.token = token;
         saveToken(token);
         return "ok";
@@ -36,8 +31,8 @@ export const useUserStore = defineStore("user", {
 
       const res = await getUserInfo();
       if (res.code == 200) {
-        this.username = res.data.checkUser.username;
-        this.avatar = res.data.checkUser.avatar;
+        this.username = res.data.name;
+        this.avatar = res.data.avatar;
         console.log("获取用户信息成功", this.avatar);
         console.log("获取用户信息成功", this.username);
         return "ok";
@@ -47,6 +42,7 @@ export const useUserStore = defineStore("user", {
     },
     async logout() {
       console.log("logout");
+      reqlogout();
       this.token = "";
       this.username = "";
       this.avatar = "";

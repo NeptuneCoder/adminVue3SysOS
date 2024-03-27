@@ -131,7 +131,7 @@ async function login() {
         message: getGreetingsMsg(),
       });
       let redirect = $route.query.redirect;
-      $router.push(redirect || "/");
+      $router.replace(redirect || "/");
     })
     .catch((error) => {
       loading.value = false;
