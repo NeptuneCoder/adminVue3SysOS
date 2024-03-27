@@ -1,6 +1,6 @@
 import { login, getUserInfo } from "@/api/user";
 import { defineStore } from "pinia";
-import { getToken, saveToken } from "@/utils/storeUtils";
+import { getToken, saveToken, removeToken } from "@/utils/storeUtils";
 import { constantRoute } from "@/router/routers";
 import { UserState } from "@/model/types";
 
@@ -50,7 +50,7 @@ export const useUserStore = defineStore("user", {
       this.token = "";
       this.username = "";
       this.avatar = "";
-      saveToken("");
+      removeToken();
       return "ok";
     },
   },

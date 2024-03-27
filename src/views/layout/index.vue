@@ -69,6 +69,7 @@ console.log(userStore.routes);
       height: 40px;
       line-height: 40px;
     }
+    //动态属性的定义
     &.fold {
       width: $base-menu-fold-width;
     }

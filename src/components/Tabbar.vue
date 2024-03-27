@@ -23,12 +23,16 @@
     display: flex;
     margin-left: 20px;
     align-items: center;
+    height: 100%;
   }
   .tabbar-right {
     width: 50%;
     display: flex;
+
     justify-content: flex-end;
     align-items: center;
+    height: 100%;
+    line-height: 100%;
   }
 }
 </style>
