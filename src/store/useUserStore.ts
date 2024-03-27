@@ -2,7 +2,7 @@ import { login, getUserInfo, reqlogout } from "@/api/user";
 import { defineStore } from "pinia";
 import { getToken, saveToken, removeToken } from "@/utils/storeUtils";
 import { constantRoute } from "@/router/routers";
-import { UserState } from "@/model/types";
+import { UserState } from "@/model/user/types";
 
 export const useUserStore = defineStore("user", {
   state: (): UserState => {
@@ -17,7 +17,7 @@ export const useUserStore = defineStore("user", {
     async userLogin(username: string, pwd: string) {
       const res = await login({ username: username, password: pwd });
       if (res.code == 200) {
-        let token = res.data;
+        const token = res.data;
         console.log("登录成功", token);
         this.token = token;
         saveToken(token);
@@ -35,6 +35,9 @@ export const useUserStore = defineStore("user", {
         this.avatar = res.data.avatar;
         console.log("获取用户信息成功", this.avatar);
         console.log("获取用户信息成功", this.username);
+        res.data.roles.forEach((item) => {
+          console.log(item);
+        });
         return "ok";
       } else {
         return Promise.reject(new Error(res.message));

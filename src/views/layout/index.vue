@@ -78,6 +78,7 @@ console.log(userStore.routes);
     width: calc(100% - #{$base-menu-width});
     height: $base-menu-topbar-height;
     background-color: white;
+    border-bottom: 1px solid #e4e4e4;
     position: absolute;
     align-items: center;
     line-height: $base-menu-topbar-height;
@@ -92,7 +93,7 @@ console.log(userStore.routes);
   .layout_main {
     width: calc(100% - #{$base-menu-width});
     height: calc(100vh - #{$base-menu-topbar-height} - 15px);
-    background-color: yellow;
+    background-color: #fff;
     position: absolute;
     top: $base-menu-topbar-height;
     left: $base-menu-width;

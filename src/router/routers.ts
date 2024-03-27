@@ -109,6 +109,16 @@ export const constantRoute = [
     },
     children: [
       {
+        path: "/product/trademark",
+        name: "trademark",
+        component: () => import("@/views/product/trademark/index.vue"),
+        meta: {
+          title: "品牌管理",
+          icon: "UserFilled",
+          hidden: false,
+        },
+      },
+      {
         path: "/product/sku",
         name: "sku",
         component: () => import("@/views/product/sku/index.vue"),
@@ -134,16 +144,6 @@ export const constantRoute = [
         component: () => import("@/views/product/attr/index.vue"),
         meta: {
           title: "属性管理",
-          icon: "UserFilled",
-          hidden: false,
-        },
-      },
-      {
-        path: "/product/trademark",
-        name: "trademark",
-        component: () => import("@/views/product/trademark/index.vue"),
-        meta: {
-          title: "品牌管理",
           icon: "UserFilled",
           hidden: false,
         },

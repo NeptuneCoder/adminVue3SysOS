@@ -1,8 +1,12 @@
 import netInstance from "@/utils/request";
-import { LoginUser } from "@/models/user";
+import {
+  LoginUserRequest,
+  UserInfoResponse,
+  LoginUserResponse,
+} from "@/models/user/types";
 import API from "./API";
 
-export function login(data: LoginUser) {
+export function login(data: LoginUserRequest): Promise<LoginUserResponse> {
   return netInstance.request({
     url: API.LOGIN_URL,
     method: "post",
@@ -10,7 +14,7 @@ export function login(data: LoginUser) {
   });
 }
 
-export function getUserInfo() {
+export function getUserInfo(): Promise<UserInfoResponse> {
   return netInstance.request({
     url: API.getUserInfo,
     method: "get",
