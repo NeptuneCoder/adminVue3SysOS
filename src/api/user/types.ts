@@ -1,15 +1,11 @@
 import { RouteRecordRaw } from "vue-router";
+import { BaseResponse } from "@/model/base";
 // 登录用户信息
 export interface LoginUserRequest {
   username: string;
   password: string;
 }
 
-export interface BaseResponse {
-  code: number;
-  message: string;
-  ok: boolean;
-}
 // 登录用户响应
 export interface LoginUserResponse extends BaseResponse {
   data: string;
