@@ -25,9 +25,16 @@
             @click="editTrademark(row.id, row.tmName, row.logoUrl)"
             >编辑</el-button
           >
-          <el-button type="primary" @click="deleteTrademark(row.id)"
-            >删除</el-button
+          <el-popconfirm
+            title="确认删除吗？"
+            @confirm="deleteTrademark(row.id)"
+            cancel-button-text="取消"
+            confirm-button-text="确定"
           >
+            <template #reference>
+              <el-button type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -81,11 +88,6 @@
         <el-button type="primary" @click="addTrademarkSubmit"> 确定 </el-button>
         <el-button @click="dialogFormVisible = false">取消</el-button>
       </template>
-    </el-dialog>
-    <el-dialog v-model="delDialogVisible" title="确认删除吗？" width="500px">
-      <el-button type="primary" @click="deleteTrademarkSubmit"> 确定 </el-button>
-      <el-button @click="delDialogVisible = false">取消</el-button>
-
     </el-dialog>
   </el-card>
 </template>
@@ -165,12 +167,10 @@ const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
   }
   return true;
 };
-const deleteTrademark = (id: string) => {
+const deleteTrademark = async (id: string) => {
   delDialogVisible.value = true;
-  trademarkData.id = id;
-};
-const deleteTrademarkSubmit = async () => {
-  let res = await reqDeleteTrademark(trademarkData.id);
+
+  let res = await reqDeleteTrademark(id);
   if (res.code === 200) {
     ElMessage.success("删除品牌成功");
     delDialogVisible.value = false;
