@@ -1,11 +1,13 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { viteMockServe } from "vite-plugin-mock";
 import vueSetupExtend from "vite-plugin-vue-setup-extend";
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  //加载不同的环境，测试，开发，生产环境;process.cwd() 表示根目录
+  let env = loadEnv(mode, process.cwd());
   console.log("command ====== ", command);
   return {
     plugins: [
@@ -32,6 +34,16 @@ export default defineConfig(({ command }) => {
         scss: {
           javascriptEnabled: true,
           additionalData: '@import "./src/styles/variable.scss";',
+        },
+      },
+    },
+    server: {
+      proxy: {
+        //根据不同的api选择不同的地址服务
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_BASE_API, //根据不同的api选择不同的地址服务
+          changeOrigin: true, //是否跨域
+          rewrite: (path) => path.replace(env.VITE_APP_BASE_API, ""), //因为实际的api地址没有'/api'前缀，所以需要重写路径将其进行替换掉
         },
       },
     },

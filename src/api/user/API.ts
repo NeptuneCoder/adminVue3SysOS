@@ -1,5 +1,5 @@
 enum API {
-  login = "/user/login",
+  LOGIN_URL = "/admin/acl/index/login",
   logout = "/admin/acl/index/logout",
   getUserInfo = "/user/info",
   getMenu = "/admin/acl/index/getMenu",

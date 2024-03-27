@@ -4,7 +4,7 @@ import API from "./API";
 
 export function login(data: LoginUser) {
   return netInstance.request({
-    url: API.login,
+    url: API.LOGIN_URL,
     method: "post",
     data: data,
   });
