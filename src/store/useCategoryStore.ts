@@ -1,21 +1,22 @@
 import { defineStore } from "pinia";
 import { getCategory1, getCategory2, getCategory3 } from "@/api/attr";
-import { AttrStoreState } from "@/api/types";
+import { AttrStoreState } from "@/api/attr/types";
 
 export const useCategoryStore = defineStore("category", {
   state: (): AttrStoreState => ({
     c1Arr: [],
-    c1v: "",
+    c1id: "",
     c2Arr: [],
-    c2v: "",
+    c2id: "",
     c3Arr: [],
-    c3v: "",
+    c3id: "",
   }),
   getters: {},
   actions: {
     async getC1() {
       const res = await getCategory1();
       this.c1Arr = res.data;
+      return res;
     },
 
     async getC2(id: number) {
@@ -25,11 +26,13 @@ export const useCategoryStore = defineStore("category", {
       } else {
         this.c2Arr = [];
       }
+
       return res;
     },
     async getC3(id: number) {
       const res = await getCategory3(id);
       this.c3Arr = res.data;
+      return res;
     },
   },
 });
