@@ -1,32 +1,33 @@
 <!--数据大屏-->
 <template>
-  <el-card class="categroy">
-    <el-form label-width="80px" :inline="true">
-      <el-form-item label="一级分类">
-        <el-select v-model="select1">
-          <el-option label="选项1" value="1"></el-option>
-          <el-option label="选项2" value="2"></el-option>
-          <el-option label="选项3" value="3"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="二级分类">
-        <el-select v-model="select1">
-          <el-option label="选项1" value="1"></el-option>
-          <el-option label="选项2" value="2"></el-option>
-          <el-option label="选项3" value="3"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="三级分类">
-        <el-select v-model="select1">
-          <el-option label="选项1" value="1"></el-option>
-          <el-option label="选项2" value="2"></el-option>
-          <el-option label="选项3" value="3"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
+  <Category class="categroy"></Category>
+  <el-card class="content">
+    <el-button type="primary"><Plus></Plus>新增属性</el-button>
+    <el-table :data="tableData" style="width: 100%; margin-top: 15px" border>
+      <el-table-column
+        prop="id"
+        label="序号"
+        width="100"
+        align="center"
+      ></el-table-column>
+      <el-table-column prop="name" label="属性名称"></el-table-column>
+      <el-table-column prop="value" label="属性值"></el-table-column>
+      <el-table-column label="属性操作" label-width="150px">
+        <template #="{ row, $index }">
+          <el-button type="primary">编辑</el-button>
+          <el-popconfirm
+            title="确认删除吗？"
+            cancel-button-text="取消"
+            confirm-button-text="确定"
+          >
+            <template #reference>
+              <el-button type="danger">删除</el-button>
+            </template>
+          </el-popconfirm>
+        </template>
+      </el-table-column>
+    </el-table>
   </el-card>
-
-  <Categroy :data="tableData" class="content"></Categroy>
 </template>
 <script setup lang="ts">
 import { reactive } from "vue";
