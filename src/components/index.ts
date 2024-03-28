@@ -8,6 +8,7 @@ import MainContianer from "@/components/MainContianer.vue";
 import Tabbar from "@/components/Tabbar.vue";
 import NavBreadcrumb from "@/components/NavBreadcrumb.vue";
 import Settings from "@/components/Settings.vue";
+import Categroy from "@/components/Categroy.vue";
 const components: { [name: string]: Component } = {
   SvgIcon,
   Logo,
@@ -16,6 +17,7 @@ const components: { [name: string]: Component } = {
   Tabbar,
   NavBreadcrumb,
   Settings,
+  Categroy,
 };
 export default {
   install(app: App) {
