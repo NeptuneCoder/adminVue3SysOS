@@ -38,11 +38,10 @@
               title="确认删除吗？"
               cancel-button-text="取消"
               confirm-button-text="确定"
+              @confirm="deleteAttr(row.id)"
             >
               <template #reference>
-                <el-button type="danger" @click="deleteAttr(row.id)"
-                  >删除</el-button
-                >
+                <el-button type="danger">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -79,6 +78,7 @@
           <template #="{ row, $index }">
             <!---将输入的值绑定到行对象的valueName上-->
             <el-input
+              :ref="(vc: any) => vc?.focus()"
               v-model="row.valueName"
               placeholder="请输入属性值"
             ></el-input>
@@ -86,16 +86,14 @@
         </el-table-column>
         <el-table-column label="操作" label-width="150px">
           <template #="{ row, $index }">
-            <el-button type="primary">编辑</el-button>
             <el-popconfirm
               title="确认删除吗？"
               cancel-button-text="取消"
               confirm-button-text="确定"
+              @confirm="deleteItemAttr(row)"
             >
               <template #reference>
-                <el-button type="danger" @click="deleteAttr(row.id)"
-                  >删除</el-button
-                >
+                <el-button type="danger">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -115,7 +113,7 @@
 <script lang="ts" setup>
 import { reqCategoryList, reqDelAttr, reqModifyAttr } from "@/api/attr";
 import { useCategoryStore } from "@/store/useCategoryStore";
-import { ref, watch, reactive } from "vue";
+import { ref, watch, reactive, onBeforeMount } from "vue";
 import { AttrValue } from "@/api/attr/types";
 import { ElMessage } from "element-plus";
 //控制显示哪个场景
@@ -149,6 +147,18 @@ const getAttrList = async () => {
   tableData.value = res.data;
   console.log("tableData:", tableData);
 };
+//编辑模式下删除属性
+const deleteItemAttr = (row: AttrValue) => {
+  attrParams.attrValueList.forEach((item, index) => {
+    if (item === row) {
+      console.log("判断两个对象是否相等:", item === row);
+      attrParams.attrValueList.splice(index, 1);
+    } else {
+      console.log("判断两个对象不相等:", item);
+      console.log("判断两个对象不相等:", row);
+    }
+  });
+};
 
 const deleteAttr = async (id: number) => {
   let resData = await reqDelAttr(id);
@@ -169,12 +179,24 @@ const showAddAttrView = async () => {
   });
 };
 //显示修改属性界面
-const showModifyAttrView = async () => {
+const showModifyAttrView = async (row: AttrValue) => {
   scene.value = 2;
+  //将属性名称和属性值列表赋值给attrParams
+  //这里使用json转一次，避免将row数据对象浅拷贝到attrParams请求参数对象上。
+  Object.assign(
+    attrParams,
+    JSON.parse(
+      JSON.stringify({
+        id: row.id,
+        attrName: row.attrName,
+        attrValueList: row.attrValueList,
+        categoryLevel: 3,
+        categoryId: categoryStore.c3id,
+      }),
+    ),
+  );
 };
-const modifyAttr = (data: AttrValue) => {
-  console.log("modifyAttr" + data.attrValueList);
-};
+
 //点击新增属性按钮
 const addAttrValue = () => {
   attrParams.attrValueList.push({});
@@ -199,6 +221,10 @@ const saveAttr = async () => {
       getAttrList();
     });
 };
+onBeforeMount(() => {
+  //$reset()可以一次性重置所有响应式数据
+  categoryStore.$reset();
+});
 </script>
 
 <style lang="less" scoped>

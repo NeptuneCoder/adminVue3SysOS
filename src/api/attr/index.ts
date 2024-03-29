@@ -1,5 +1,6 @@
 import netInstance from "@/utils/request";
 import { AttrTypeResponse, AttrValue } from "@/api/attr/types";
+import { BaseResponse } from "../base";
 
 // 商品分类相关API
 enum API {
@@ -11,7 +12,7 @@ enum API {
   C3_URL = "/admin/product/getCategory3/",
   //获取属性列表接口地址
   ATTR_URL = "/admin/product/attrInfoList/",
-  DELETE_ATTR_URL = "/admin/product/deleteAttr/{attrId}",
+  DELETE_ATTR_URL = "/admin/product/deleteAttr/",
   MODIFY_ATTR_URL = "/admin/product/saveAttrInfo",
 }
 
@@ -28,15 +29,13 @@ export function getCategory3(id: number) {
 }
 
 export function reqCategoryList(c1Id: string, c2Id: string, c3Id: string) {
-  return netInstance.get<any, AttrValueBaseResponse>(
+  return netInstance.get<any, BaseResponse>(
     API.ATTR_URL + c1Id + "/" + c2Id + "/" + c3Id,
   );
 }
 
 export function reqDelAttr(attrId: string | number) {
-  return netInstance.get<any, AttrValueBaseResponse>(
-    API.DELETE_ATTR_URL.replace("{attrId}", attrId),
-  );
+  return netInstance.get<any, BaseResponse>(API.DELETE_ATTR_URL + `${attrId}`);
 }
 
 export function reqModifyAttr(data: AttrValue) {
