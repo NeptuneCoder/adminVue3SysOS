@@ -39,3 +39,28 @@ export interface UserData {
   pages: number;
   records: User[];
 }
+
+/**
+ * [{
+				"id": 1,
+				"createTime": "2021-05-31 18:09:18",
+				"updateTime": "2023-04-28 11:03:38",
+				"roleName": "超级管理员",
+				"remark": null
+			},
+ */
+
+export interface RoleBaseResponse extends BaseResponse {
+  data: RoleResponse;
+}
+export interface RoleResponse {
+  assignRoles: Role[];
+  allRolesList: Role[];
+}
+export interface Role {
+  id: number;
+  createTime: string;
+  updateTime: string;
+  roleName: string;
+  remark: string | null;
+}

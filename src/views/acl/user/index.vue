@@ -45,7 +45,9 @@
       ></el-table-column>
       <el-table-column label="操作" width="400px">
         <template #="{ row, $index }">
-          <el-button type="primary">分配角色</el-button>
+          <el-button type="primary" @click="handleOpenRole(row)"
+            >分配角色</el-button
+          >
           <el-button type="primary" icon="edit" @click="updateUserDrawer(row)"
             >编辑</el-button
           >
@@ -111,6 +113,46 @@
       <el-button @click="handleClose">取消</el-button>
     </template>
   </el-drawer>
+
+  <el-drawer v-model="drawerRole" :before-close="handleCloseRole">
+    <template #title>分配角色</template>
+
+    <template #default>
+      <el-form ref="form" label-position="left" label-width="100px">
+        <el-form-item label="用户姓名" prop="name">
+          <el-input
+            placeholder="请输入用户姓名"
+            v-model="roleUsername"
+            disabled="true"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="角色列表">
+          <el-checkbox
+            v-model="checkAll"
+            :indeterminate="isIndeterminate"
+            @change="handleCheckAllChange"
+            >全选</el-checkbox
+          >
+          <el-checkbox-group
+            v-model="checkedRole"
+            @change="handleCheckedCitiesChange"
+          >
+            <el-checkbox
+              v-for="city in allRoleList"
+              :key="city.id"
+              :label="city"
+              :value="city"
+              >{{ city.roleName }}</el-checkbox
+            >
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
+    </template>
+    <template #footer>
+      <el-button type="primary" @click="handleRoleSubmit">提交</el-button>
+      <el-button @click="handleCloseRole">取消</el-button>
+    </template>
+  </el-drawer>
 </template>
 <script setup lang="ts">
 import {
@@ -118,10 +160,11 @@ import {
   reqAddOrUpdateUser,
   reqDeleteUser,
 } from "@/api/acl/user";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, watch } from "vue";
 import { User } from "@/api/acl/user/types";
 import { ElMessage } from "element-plus";
 let form = ref();
+//drawer表单验证规则
 let rules = reactive({
   username: [
     { required: true, message: "请输入用户昵称", trigger: "blur" },
@@ -168,18 +211,20 @@ let pageSize = ref(10);
 let totalSize = ref(0);
 let background = true;
 let users = ref<User[]>([]);
-//控制抽屉的显示和隐藏
+//控制添加用户和修改用户的抽屉显示和隐藏
 let drawer = ref(false);
+
 //用于收集drawer表单数据
 let formData = ref<User>({
   name: "",
   username: "",
   password: "",
 });
-
+//显示添加用户的抽屉
 const showAddUserDrawer = () => {
   drawer.value = true;
 };
+
 const updateUserDrawer = (user: User) => {
   drawer.value = true;
   formData.value = JSON.parse(JSON.stringify(user));
@@ -230,5 +275,20 @@ const deleteUser = async (row: User) => {
 onMounted(() => {
   getUsersInfo();
 });
+
+import useRole from "@/views/acl/user/useRole";
+const {
+  checkAll,
+  isIndeterminate,
+  checkedRole,
+  drawerRole,
+  roleUsername,
+  allRoleList,
+  handleOpenRole,
+  handleCloseRole,
+  handleRoleSubmit,
+  handleCheckAllChange,
+  handleCheckedCitiesChange,
+} = useRole();
 </script>
 <style lang="less" scoped></style>
