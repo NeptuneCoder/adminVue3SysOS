@@ -1,5 +1,10 @@
 import netInstance from "@/utils/request";
-import { UserBaseResponse, User, RoleBaseResponse } from "@/api/acl/user/types";
+import {
+  UserBaseResponse,
+  User,
+  RoleBaseResponse,
+  AssignRoleRequest,
+} from "@/api/acl/user/types";
 import { BaseResponse } from "@/api/base";
 enum API {
   USER_LIST = "/admin/acl/user/{page}/{limit}",
@@ -7,6 +12,8 @@ enum API {
   UPDATE_USER = "/admin/acl/user/update",
   DELETE_USER = "/admin/acl/user/remove/{id}",
   ALL_ROLE_USER = "/admin/acl/user/toAssign/{adminId}",
+  //分配角色
+  ASSIGN_ROLE = "/admin/acl/user/doAssignRole",
 }
 
 export const reqDeleteUser = (id: number): Promise<BaseResponse> => {
@@ -53,4 +60,10 @@ export const reqAllRoleUser = (adminId: number): Promise<RoleBaseResponse> => {
   return netInstance.get<any, RoleBaseResponse>(
     API.ALL_ROLE_USER.replace("{adminId}", adminId.toString()),
   );
+};
+
+export const reqAssignRole = (
+  data: AssignRoleRequest,
+): Promise<BaseResponse> => {
+  return netInstance.post<any, BaseResponse>(API.ASSIGN_ROLE, data);
 };

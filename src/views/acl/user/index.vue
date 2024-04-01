@@ -289,6 +289,11 @@ const {
   handleRoleSubmit,
   handleCheckAllChange,
   handleCheckedCitiesChange,
+  mitter,
 } = useRole();
+mitter.on("refreshUserList", () => {
+  console.log("refreshUserList");
+  getUsersInfo();
+});
 </script>
 <style lang="less" scoped></style>

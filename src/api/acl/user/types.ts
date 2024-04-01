@@ -64,3 +64,8 @@ export interface Role {
   roleName: string;
   remark: string | null;
 }
+
+export interface AssignRoleRequest {
+  roleIdList: number[];
+  userId: number;
+}

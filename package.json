@@ -24,6 +24,7 @@
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "element-plus": "^2.6.1",
+    "mitt": "^3.0.1",
     "nprocess": "^1.0.4",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",

@@ -1,11 +1,17 @@
 import { ref } from "vue";
-import { User, Role } from "@/api/acl/user/types";
+import { User, Role, AssignRoleRequest } from "@/api/acl/user/types";
 
-import { reqAllRoleUser } from "@/api/acl/user";
+import { reqAllRoleUser, reqAssignRole } from "@/api/acl/user";
+import { ElMessage } from "element-plus";
+import mitt from "mitt";
 export default function () {
   const drawerRole = ref(false);
-
+  const mitter = mitt();
+  const curUser = ref<User>({
+    id: 0,
+  });
   const handleOpenRole = (user: User) => {
+    curUser.value = user;
     console.log("handleOpenRole  我被调用了嘛？");
     drawerRole.value = true;
     roleUsername.value = user.username;
@@ -16,7 +22,21 @@ export default function () {
     drawerRole.value = false;
   };
   //点击提交
-  const handleRoleSubmit = () => {};
+  const handleRoleSubmit = async () => {
+    console.log("handleRoleSubmit  curUser.value.id!=", curUser.value.id!);
+    const params: AssignRoleRequest = {
+      userId: curUser.value.id!,
+      roleIdList: [...checkedRole.value.map((role) => role.id)],
+    };
+    const res = await reqAssignRole(params);
+    if (res.code === 200) {
+      ElMessage.success("角色分配成功");
+      drawerRole.value = false;
+    } else {
+      ElMessage.error("角色分配失败");
+    }
+    mitter.emit("refreshUserList");
+  };
   const allRoleList = ref<Role[]>([]);
   const roleUsername = ref<string>("");
 
@@ -48,6 +68,7 @@ export default function () {
     isIndeterminate.value = false;
     checkAll.value = false;
   };
+
   return {
     checkAll,
     isIndeterminate,
@@ -60,5 +81,6 @@ export default function () {
     handleRoleSubmit,
     handleCheckAllChange,
     handleCheckedCitiesChange,
+    mitter,
   };
 }
