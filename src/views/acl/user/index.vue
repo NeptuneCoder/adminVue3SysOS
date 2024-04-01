@@ -6,7 +6,7 @@
       style="display: flex; justify-content: space-between; align-items: center"
     >
       <el-form-item label="用户名">
-        <el-input v-model="username" placeholder="请您输入用户名"></el-input>
+        <el-input v-model="keyword" placeholder="请您输入用户名"></el-input>
       </el-form-item>
       <el-form-item align="right">
         <el-button type="primary" @click="search">查询</el-button>
@@ -16,8 +16,18 @@
   </el-card>
   <el-card style="margin-top: 20px">
     <el-button type="primary" @click="showAddUserDrawer">添加</el-button>
-    <el-button type="error">批量删除</el-button>
-    <el-table style="width: 100%; margin-top: 20px" :data="users" border>
+    <el-button
+      type="error"
+      @click="delBatchUser"
+      :disabled="checkedUserList.length == 0"
+      >批量删除</el-button
+    >
+    <el-table
+      style="width: 100%; margin-top: 20px"
+      :data="users"
+      border
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection"></el-table-column>
       <el-table-column type="index" label="#" width="100"></el-table-column>
       <el-table-column prop="id" label="ID" width="100"></el-table-column>
@@ -204,13 +214,9 @@ function checkPwd(rule, value, callback) {
     callback();
   }
 }
-let username = ref();
-let pageNo = ref(1);
-let pageSize = ref(10);
-//分页总数
-let totalSize = ref(0);
+
 let background = true;
-let users = ref<User[]>([]);
+
 //控制添加用户和修改用户的抽屉显示和隐藏
 let drawer = ref(false);
 
@@ -258,11 +264,14 @@ const handleSubmit = async () => {
 
 //TODO: 获取所有用户信息
 const getUsersInfo = async () => {
-  let res = await reqAllUserInfo(pageNo.value, pageSize.value);
+  let res = await reqAllUserInfo(pageNo.value, pageSize.value, "");
   users.value = res.data.records;
   totalSize.value = res.data.total;
 };
 
+const search = () => {
+  getAllUserInfo(pageNo.value, pageSize.value);
+};
 const deleteUser = async (row: User) => {
   let res = await reqDeleteUser(row.id?.toString());
   if (res.code === 200) {
@@ -275,6 +284,11 @@ const deleteUser = async (row: User) => {
 onMounted(() => {
   getUsersInfo();
 });
+import useDelUser from "@/views/acl/user/useDelUser";
+const { checkedUserList, delBatchUser, handleSelectionChange } = useDelUser();
+import useSearch from "@/views/acl/user/useSearch";
+const { users, pageNo, pageSize, totalSize, keyword, getAllUserInfo, reset } =
+  useSearch();
 
 import useRole from "@/views/acl/user/useRole";
 const {

@@ -14,6 +14,8 @@ enum API {
   ALL_ROLE_USER = "/admin/acl/user/toAssign/{adminId}",
   //分配角色
   ASSIGN_ROLE = "/admin/acl/user/doAssignRole",
+  //删除一批用户
+  DELETE_BATCH_USER = "/admin/acl/user/batchRemove",
 }
 
 export const reqDeleteUser = (id: number): Promise<BaseResponse> => {
@@ -47,12 +49,15 @@ export const reqAddOrUpdateUser = (data: User): Promise<BaseResponse> => {
 export const reqAllUserInfo = (
   page: number,
   limit: number,
+  username?: string,
 ): Promise<UserBaseResponse> => {
   return netInstance.get<any, UserBaseResponse>(
     API.USER_LIST.replace("{page}", page.toString()).replace(
       "{limit}",
       limit.toString(),
-    ),
+    ) +
+      "?username=" +
+      username,
   );
 };
 
@@ -66,4 +71,8 @@ export const reqAssignRole = (
   data: AssignRoleRequest,
 ): Promise<BaseResponse> => {
   return netInstance.post<any, BaseResponse>(API.ASSIGN_ROLE, data);
+};
+
+export const reqDeleteBatchUser = (ids: number[]): Promise<BaseResponse> => {
+  return netInstance.post<any, BaseResponse>(API.DELETE_BATCH_USER, ids);
 };
