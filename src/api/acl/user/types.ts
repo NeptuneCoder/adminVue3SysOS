@@ -58,7 +58,7 @@ export interface RoleResponse {
   allRolesList: Role[];
 }
 export interface Role {
-  id: number;
+  id?: number;
   createTime: string;
   updateTime: string;
   roleName: string;

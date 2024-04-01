@@ -2,8 +2,9 @@ import { ref } from "vue";
 import { reqAllUserInfo } from "@/api/acl/user";
 import { User } from "@/api/acl/user/types";
 import { useLayoutSettingStore } from "@/store/useLayoutSettingStore";
-let settingStore = useLayoutSettingStore();
+
 export default function () {
+  const settingStore = useLayoutSettingStore();
   const keyword = ref("");
   const pageNo = ref(1);
   const pageSize = ref(10);
